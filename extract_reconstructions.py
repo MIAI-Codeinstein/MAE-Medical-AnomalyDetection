@@ -12,7 +12,7 @@ from tqdm import tqdm
 
 import models_mae
 
-DATASETS = ['brats', 'luna16_unnorm']
+DATASETS = ['brats', 'luna16_unnorm', 'iaaa']
 
 
 def prepare_model(chkpt_dir, arch='mae_vit_large_patch16'):
@@ -126,6 +126,8 @@ def get_normal_images_paths():
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/split/val/normal/*.npy')
         else:
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/split/test/normal/*.npy')
+    elif args.dataset == 'iaaa':
+        return glob.glob('/content/drive/MyDrive/IAAA/Data/normal/*.npy/')
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
 
@@ -142,6 +144,8 @@ def get_abnormal_images_paths():
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/split/val/abnormal/*.npy')
         else:
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/split/test/abnormal/*.npy')
+    elif args.dataset == 'iaaa':
+        return glob.glob('/content/drive/MyDrive/IAAA/Data/abnormal/*.npy/')
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
 
