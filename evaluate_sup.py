@@ -14,7 +14,10 @@ from tqdm import tqdm
 
 import models_vit
 
-DATASETS = ['brats', 'luna16_unnorm']
+import pydicom
+from skimage.transform import resize
+
+DATASETS = ['brats', 'luna16_unnorm', 'iaaa']
 
 
 def prepare_model(chkpt_dir, arch='mae_vit_large_patch16'):
@@ -67,6 +70,10 @@ def get_normal_images_paths():
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/reconstructions/mae_mask_ratio_0.75_800e/val/normal/*.pkl')
         else:
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/reconstructions/mae_mask_ratio_0.75_800e/test/normal/*.pkl')
+        
+    elif args.dataset == 'iaaa':
+        return glob.glob('/content/drive/MyDrive/IAAA/Reconstructions/normal/*/')
+    
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
 
@@ -84,6 +91,10 @@ def get_abnormal_images_paths():
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/reconstructions/mae_mask_ratio_0.75_800e/val/abnormal/*.pkl')
         else:
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/reconstructions/mae_mask_ratio_0.75_800e/test/abnormal/*.pkl')
+
+    elif args.dataset == 'iaaa':
+        return glob.glob('/content/drive/MyDrive/IAAA/Reconstructions/abnormal/*/')
+    
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
 
