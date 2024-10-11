@@ -23,7 +23,7 @@ DATASETS = ['brats', 'luna16_unnorm', 'iaaa']
 def prepare_model(chkpt_dir, arch='mae_vit_large_patch16'):
     # build model
     img_size = 64
-    if args.dataset == 'brats':
+    if args.dataset == 'brats' or args.dataset == 'iaaa':
         img_size = 224
 
     model = models_vit.__dict__[arch](
@@ -72,7 +72,7 @@ def get_normal_images_paths():
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/reconstructions/mae_mask_ratio_0.75_800e/test/normal/*.pkl')
         
     elif args.dataset == 'iaaa':
-        return glob.glob('/content/drive/MyDrive/IAAA/Reconstructions/normal/*/')
+        return glob.glob('/content/MAE-Data/Reconstructions/normal/*.pkl')
     
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
@@ -93,7 +93,7 @@ def get_abnormal_images_paths():
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/reconstructions/mae_mask_ratio_0.75_800e/test/abnormal/*.pkl')
 
     elif args.dataset == 'iaaa':
-        return glob.glob('/content/drive/MyDrive/IAAA/Reconstructions/abnormal/*/')
+        return glob.glob('/content/MAE-Data/Reconstructions/abnormal/*.pkl')
     
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
