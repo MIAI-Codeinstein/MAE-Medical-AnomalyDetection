@@ -19,7 +19,7 @@ def prepare_model(chkpt_dir, arch='mae_vit_large_patch16'):
     # build model
     img_size = 64
     patch_size = 16
-    if args.dataset == 'brats':
+    if args.dataset == 'brats' or args.dataset == 'iaaa':
         img_size = 224
         patch_size = 16
 
@@ -38,7 +38,7 @@ def apply_gaussian_filter(image):
 
 
 def degrade_reconstruction(img_, apply_blur):
-    if args.dataset == 'brats':
+    if args.dataset == 'brats' or args.dataset == 'iaaa':
         h = np.random.randint(10, 40)  # max H
         w = np.random.randint(10, 40)  # max w
     elif args.dataset == 'luna16_unnorm':
@@ -160,7 +160,7 @@ def load_image(img_path_):
 
 
 def process_image(img_):
-    if args.dataset == 'brats':
+    if args.dataset == 'brats' or args.dataset == 'iaaa':
         mean_ = np.array([0.])
         std_ = np.array([1.])
     elif args.dataset == 'luna16_unnorm':
@@ -216,7 +216,7 @@ def write_reconstructions(model_mae, paths, is_abnormal: bool = False, iter_: in
             if idx_path < len(paths):
                 path_ = paths[idx_path]
                 img_ = load_image(path_)
-                if args.dataset == 'brats':
+                if args.dataset == 'brats' or args.dataset == 'iaaa':
                     img_ = resize(img_, (224, 224), order=3)  # 3: Bi-cubic
                 else:
                     img_ = resize(img_, (64, 64), order=3)  # 3: Bi-cubic
