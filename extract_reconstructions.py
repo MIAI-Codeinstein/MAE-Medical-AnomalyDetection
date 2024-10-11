@@ -127,7 +127,7 @@ def get_normal_images_paths():
         else:
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/split/test/normal/*.npy')
     elif args.dataset == 'iaaa':
-        return glob.glob('/content/drive/MyDrive/IAAA/Data/normal/*.npy/')
+        return glob.glob('/content/MAE-Data/Normal/*.npy/')
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
 
@@ -145,7 +145,7 @@ def get_abnormal_images_paths():
         else:
             return glob.glob('/media/lili/SSD2/datasets/brats/BraTS2020_training_data/split/test/abnormal/*.npy')
     elif args.dataset == 'iaaa':
-        return glob.glob('/content/drive/MyDrive/IAAA/Data/abnormal/*.npy/')
+        return glob.glob('/content/MAE-Data/Abnormal/*.npy/')
     else:
         raise ValueError(f'Data set {args.dataset} not recognized.')
 
